@@ -5,8 +5,6 @@ import numpy as np
 
 bbdata = pd.read_csv("bbdatafull.csv")
 
-dukedata = bbdata[bbdata['School'] == 'Duke']
-
 # Give the page a header
 st.header(
     'College Basketball Data'
@@ -22,7 +20,7 @@ school_val = st.sidebar.selectbox("Choose Team", bbdata['School'])
 y_val = st.sidebar.selectbox("Choose Metric", bbdata.select_dtypes(include=np.number).columns.tolist())
 
 
-scatter = alt.Chart(bbdata[bbdata['School'] == school_val], title='NCAA Data Over Time').mark_line().encode(
+scatter = alt.Chart(bbdata[bbdata['School'] == school_val], title= f"NCAA Data Over Time for {school_val}").mark_line().encode(
     alt.X('Year'),
     alt.Y(y_val),
     tooltip=[y_val]
@@ -31,9 +29,3 @@ scatter = alt.Chart(bbdata[bbdata['School'] == school_val], title='NCAA Data Ove
 )
 
 st.altair_chart(scatter, use_container_width=True)
-
-
-
-
-
-
